@@ -74,4 +74,5 @@ These show up in every phase:
 
 ## Version
 
-v5 (May 2026). Living document — edit as you go.
+v6 (June 2026). Living document — edit as you go. See
+[CHANGELOG.md](CHANGELOG.md) for version history.

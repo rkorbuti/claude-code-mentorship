@@ -12,6 +12,7 @@ The big phase. Three approaches to multi-agent in sequence: hand-built → Anthr
 - Build a multi-agent system three ways.
 - Outcomes for rubric-based grading.
 - Advisor tool for cost-routing (Sonnet executor + Opus advisor).
+- `/effort` level discipline for cost control. Use `low` for routine source polling, `medium` for summarization, `high` for the editor team's adversarial round.
 - Project E: a working multi-agent Telegram bot that delivers a daily Claude Code / vibe coding digest, used by you daily.
 
 ## Core Patterns This Phase Teaches
@@ -21,6 +22,8 @@ Two advanced patterns that Project E specifically leans on:
 **Ralph Wiggum loop.** An autonomous agent pattern where the agent pulls work from a queue (a GitHub Issues backlog, a database table, a TODO file), does the work, evaluates against criteria, retries on failure, and loops until the queue is empty or the day is done. Named after the Simpsons character; the joke is that "do the next thing on the list, then check if it's good" beats sophisticated coordination most of the time. Your Phase 3 stop hook was the mechanism; this is the architecture. Project E's coordinator pulls "today's sources," dispatches work, evaluates each item against the Outcomes rubric, retries failures, ships when done. The full pattern is documented with a runnable repo in `shanraisshan/claude-code-best-practice` — read it before week 14.
 
 **Subagent challenge pattern.** When you want quality on an output, spawn multiple subagents with different perspectives that challenge each other before consensus. Cherny's `/code-review` command does this — style checker, history reader, bug flagger all run in parallel from different angles, with a final synthesizer reconciling. The adversarial dynamic produces cleaner results than a single critical reviewer. You will use this for Project E's editor: spawn a fact-checker and a redundancy-checker alongside the main editor, have them argue before the digest ships.
+
+**Dynamic Workflows (/ultracode).** A May 2026 addition: Claude Code's native primitive for fan-out parallel sub-agents using adversarial verification and tournament patterns. With Opus 4.8 it can spawn hundreds of parallel sub-agents on a shared filesystem. Conceptually distinct from Agent Teams (which is human-coordinated, message-passing between sessions) and from custom subagents in your `.claude/agents/` (which are specialists invoked one-at-a-time via the Task tool). Use `/ultracode` when a problem decomposes into many independent parallel tasks that all need the same kind of work done (e.g., "review these 30 PRs against my style guide"). The trigger keyword used to be `/workflow`; renamed to `/ultracode` on May 29, 2026.
 
 ## External Learning This Phase
 - Anthropic Academy: **Building with the Claude API**.
@@ -82,7 +85,7 @@ Pick **one**: claude-flow, maestro-orchestrate, or Conductor. Build a third vers
 **Stack:**
 - Python service with Claude Agent SDK + `python-telegram-bot`.
 - Postgres on Neon (sources, items, feedback log, daily history).
-- Scheduled run via Fly.io scheduled machines or a cron container.
+- Scheduled run via Fly.io scheduled machines, a cron container, or Anthropic's Scheduled Managed Agents (native cron for managed agents, public beta — see `platform.claude.com/docs/en/managed-agents`). The managed path is cleaner but adds dependency on the platform; the Fly.io path keeps you in control of the scheduler. Pick based on whether you want to learn cron scheduling on Fly or focus learning budget on the agents themselves.
 - Deployed to Fly.io.
 
 **Outcomes rubric (starting point — refine after first week):**
@@ -103,7 +106,7 @@ Each digest must:
 **Requirements for milestone:**
 - ≥4 specialist subagents besides the coordinator.
 - Outcomes rubric in production (editor uses it; logs of grades persist).
-- Advisor tool active: Sonnet 4.6 executor, Opus 4.7 advisor on hard editorial calls.
+- Advisor tool active: Sonnet 4.6 executor, Opus 4.8 advisor on hard editorial calls.
 - Telegram interface with inline keyboards.
 - Webhook on failure to your inbox.
 - Running daily, used by you for ≥7 days before Phase 5 ends.
@@ -115,6 +118,7 @@ Each digest must:
 - Should the editor have veto power? (Yes — Outcomes rubric should be able to send back. This is the Ralph Wiggum retry loop.)
 - How does feedback feed back into the curator? (Log clicks → weight source preferences nightly.)
 - Is the editor a single agent or a challenge team? (Use the subagent challenge pattern.)
+- For high-fanout days (many new sources, large backlog), could `/ultracode` replace the manual coordinator? (Probably yes for the source-polling step — that's a clean fan-out problem with no inter-dependency. Worth a stretch experiment in week 17.)
 
 ## Phase 5 Milestone
 - [ ] Hand-built coordinator system works (5.1).

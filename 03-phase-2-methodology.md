@@ -65,7 +65,7 @@ Build an AI changelog generator: user pastes a GitHub diff URL (or PR number), t
 Workflow:
 1. Use `/feature-dev` to scope. Before accepting the plan, have Claude interview *you* on anything ambiguous using AskUserQuestion (the interview-then-execute pattern). Lock the spec, then start a fresh session to execute (Plan/Execute/Clear).
 2. Decompose into 4–5 **vertical slices** — each slice ships an end-to-end thin path. Example: slice 1 = "submit a diff URL and see a single-bullet changelog rendered." Slice 2 = "save and view changelog history." Slice 3 = "tag entries by type." Resist horizontal decomposition.
-3. Open Agent Teams. Lead session coordinates. Spawn 2–3 teammates in git worktrees, each picking up a slice in parallel.
+3. Open Agent Teams. Lead session coordinates. Spawn 2–3 teammates in git worktrees, each picking up a slice in parallel. Use the `isolation: "worktree"` parameter on the Agent tool — as of May 2026 this handles worktree creation, branching from `worktree.baseRef` ("fresh" or "head"), and cleanup automatically. The teaching point about coordination friction stays; the mechanics just got cleaner.
 4. Teammates message each other directly when they hit shared decisions (e.g., schema changes).
 5. Merge in waves. After each wave, run `/codex:adversarial-review` for a second opinion from a different model family.
 6. Add auth (Clerk or NextAuth), Stripe Checkout in test mode, deploy.

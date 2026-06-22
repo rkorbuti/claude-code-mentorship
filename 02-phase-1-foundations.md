@@ -8,7 +8,7 @@
 
 ## Goals
 - Multi-surface fluency: CLI, Desktop (Chat/Cowork/Code), Agent View, mobile dispatch.
-- The May 2026 control surface: `CLAUDE.md`, slash commands, Plan/Auto/Ask modes, hard deny rules, file checkpointing, `/recap`, `/bg`, `/schedule`.
+- The May 2026 control surface: `CLAUDE.md`, slash commands, Plan/Auto/Ask modes, hard deny rules, file checkpointing, `/recap`, `/bg`, `/schedule`, `/effort` (five levels: low/medium/high/xhigh/auto — auto is Max-only; controls thinking-token budget and cost per turn).
 - **Your first custom subagent** in `.claude/agents/`.
 - Install and use the starter plugin stack: feature-dev, frontend-design, Context7, claude-mem.
 
