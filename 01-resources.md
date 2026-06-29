@@ -23,6 +23,29 @@ Hosted at `anthropic.skilljar.com`. Free, well-made by the team that builds Clau
 
 Certificates are real (issued by the model provider). Worth adding to LinkedIn after each.
 
+## Free Official: Frontend Masters
+
+One fully-free course worth taking. No subscription required.
+
+**Claude Code by Lydia Hallie** (`frontendmasters.com/courses/claude-code/`)
+— ~1.9 hours, 16 lessons, May 2026. Taught by a member of the Claude Code
+team at Anthropic (previously Head of DX at Bun, Staff DevRel at Vercel).
+
+Covers: CLAUDE.md, Plan/Deny mode, effort levels, model selection, skills,
+hooks, sub-agents, agent teams, plugins, MCP, Agent SDK, Cowork.
+
+**When to take:** during Phase 1, alongside Claude Code in Action.
+Reinforces the Anthropic Academy material with a different teacher's
+framing, and previews Phase 3–5 territory weeks before you formally
+get there. Previewing topics ahead of formal study aids consolidation.
+
+**Note:** Brian Holt's MCP course on the same platform is paywalled
+beyond a 10-minute preview. Skip it — the Anthropic Academy MCP
+courses plus the Python FastMCP tutorial in Phase 4 cover the same
+ground hands-on and for free.
+
+---
+
 ## Paid Course (Optional, Expensive): Matt Pocock — *Claude Code for Real Engineers*
 
 `aihero.dev` — $795, 2-week cohort. The most credible advanced practical course currently available.
